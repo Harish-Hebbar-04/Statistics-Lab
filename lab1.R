@@ -9,5 +9,5 @@ ggplot(data=mtcars,aes(x=hp,y=mpg))+
          geom_smooth(method = "lm" ,se=FALSE)+
         labs(title="MPG vs HP",
              x="Horse Power",
-             y="Milage er Galoon")+
+             y="Milage per Galoon")+
   theme_minimal()

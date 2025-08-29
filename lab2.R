@@ -9,6 +9,6 @@ ggplot(data=mtcars,aes(sample=mpg))+
   stat_qq()+
   stat_qq_line()+
   labs(title = "Q-Q Plot for MPG",
-       x = "THeoretical Quantiles",
+       x = "Theoretical Quantiles",
        y = "MPG (sample)")+
   theme_minimal()

@@ -1,28 +1,35 @@
-# 9) Develop a Python/R code to build a simple Linear Regression model to predict sales units
-# based on the advertising budget spent on TV. Display the statistical summary of the
-# model.
+# Develop a Python code to build a simple Linear Regression model to predict sales units 
+# based on the advertising budget spent on TV. Display the statistical summary of the 
+# model. 
+# 3 
+#  Sales 2 4 6 9 12 34 45  
+# TV 1 2 4 7 9 11 15
 
-import numpy as np
+# pip install pandas statsmodels matplotlib
+import pandas as pd
+import statsmodels.api as sm
 import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
 
-sales = np.array([2, 4, 6, 9, 12, 34, 45])
-tv_budgets = np.array([1, 2, 4, 7, 9, 11, 15])
+data = {
+    'TV': [1,2,4,7,9,11,15],
+    'Sales': [2,4,6,9,12,34,45]
+}
 
-x = tv_budgets.reshape(-1, 1)
-y = sales
+df = pd.DataFrame(data)
 
-model = LinearRegression()
-model.fit(x, y)
+X = df['TV']
+Y = df['Sales']
+X = sm.add_constant(X)
+# print(X)
 
-print("Coefficient:", model.coef_[0])
-print("Intercept:", model.intercept_)
+model = sm.OLS(Y,X).fit()
 
-y_pred = model.predict(x)
+print(model.summary())
 
-plt.scatter(x, y, color='b', label="Actual Sales")
-plt.plot(x, y_pred, color='r', label="Linear Regression")
-plt.xlabel("TV Budget")
+plt.scatter(df['TV'],df['Sales'], color='blue', label='Actual Data')
+plt.plot(df['TV'],model.predict(X),color='red', label='Fitted Line')
+plt.title("Liner Regression: Sales vs TV Advertising Budget")
+plt.xlabel("TV Advertising Budget")
 plt.ylabel("Sales")
 plt.legend()
 plt.show()
